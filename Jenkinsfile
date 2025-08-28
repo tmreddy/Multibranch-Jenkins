@@ -49,7 +49,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Running tests for develop branch..."
-                sh 'pytest -v'
+                sh 'venv/bin/pytest -v'
             }
         }
 
