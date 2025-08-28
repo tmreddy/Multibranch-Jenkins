@@ -20,21 +20,25 @@ pipeline {
                 sh """
                     # Create virtual environment if it doesn't exist
                     python3 -m venv ${VENV_DIR}
+                    # Activate venv
+                    . venv/bin/activate
                     # Upgrade pip inside the venv
-                    ${VENV_DIR}/bin/pip install --upgrade pip
+                    pip install --upgrade pip
+                    # Install dependencies into venv
+                    pip install -r requirements.txt
                 """
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                echo "Installing dependencies for develop branch..."
-                sh """
-                    # Install dependencies from requirements.txt
-                    ${VENV_DIR}/bin/pip install -r requirements.txt
-                """
-            }
-        }
+        // stage('Install Dependencies') {
+        //     steps {
+        //         echo "Installing dependencies for develop branch..."
+        //         sh """
+        //             # Install dependencies from requirements.txt
+        //             ${VENV_DIR}/bin/pip install -r requirements.txt
+        //         """
+        //     }
+        // }
         
         stage('Build') {
             steps {
