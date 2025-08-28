@@ -8,37 +8,36 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "Checking out develop branch"
+                echo "Checking out feature branch"
                 checkout scm
             }
         }
 
         stage('Build') {
             steps {
-                echo "Installing dependencies for develop branch..."
+                echo "Installing dependencies for feature branch..."
                 sh 'pip install -r requirements.txt'
-                echo "Develop-specific build steps placeholder"
+                echo "Feature-specific build steps placeholder"
             }
         }
 
         stage('Test') {
             steps {
-                echo "Running tests for develop branch..."
+                echo "Running tests for feature branch..."
                 sh 'pytest -v'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying develop branch to staging environment..."
-                sh 'echo "Staging deploy placeholder"'
+                echo "Feature branch: no deploy"
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline finished for develop branch"
+            echo "Pipeline finished for feature branch"
         }
         success {
             echo "Pipeline succeeded!"
